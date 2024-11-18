@@ -26,8 +26,11 @@ In this project, I analyzed an email phishing scenario provided in a CTF lab env
 
 ### Tools Used
 
-- Wireshark
-- URL Decoder
+- Notepad++
+- CyberChef
+- HxD (Hex Editor)
+- VirtualBox
+- Metadata Analysis Tools (e.g., ExifTool)
 
 ## Steps
 
