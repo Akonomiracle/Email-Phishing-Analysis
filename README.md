@@ -34,15 +34,24 @@ In this project, I analyzed an email phishing scenario provided in a CTF lab env
 
 ## Steps
 
-#### Step 1: Investigating PCAP File Properties
+#### Step 1: Email Analysis
 
-1. Opened the PCAP file in Wireshark and accessed the file properties via the Statistics menu.
-2. Verified the capture date and duration: February 7, 2021, over a 15-minute span.
-3. Confirmed that the provided PCAP matched the alert timeline, ensuring accurate analysis.
+1. Examination of Email Headers:
+  - Inspected headers to identify the sender's authenticity, email server path, and authentication statuses such as SPF, DKIM, and DMARC.
+![Ref 1  spf does not permit](https://github.com/user-attachments/assets/f196a4eb-aee9-4d93-aad8-80a6e6ecd668)
+Ref 1. SPF does not recognize the IP and domain as a permitted sender.
 
-![Ref 2  time frame](https://github.com/user-attachments/assets/485203e2-4419-4fbf-b6c0-6cc5764c3a17)
-Ref 1. Investigating PCAP File Properties.
+![Ref 2  from and reply to](https://github.com/user-attachments/assets/ca5dd3e4-0130-4908-be14-df2c005b9954)
+Ref 2. The from and reply to emails are different
 
+![Ref 9  recieved from fake email](https://github.com/user-attachments/assets/94da17a5-cb89-4206-a6b0-bb1b76ca7ade)
+![Ref 10  recieved from fake email](https://github.com/user-attachments/assets/52ecbfcb-ccb3-455c-a268-59d23e3f9ec7)
+Ref 3. recognized emkei as a fake email host
+
+2. Decoded Base64 Content:
+  - Used CyberChef to decode the email body and attachments. The email body contained a ransom demand along with a clue encoded as Base64.
+![Ref 4  decoded email](https://github.com/user-attachments/assets/e687e929-286e-4a2e-ba7b-dfaced4e91e9)
+Ref 4. decoded email using CyberChef
 
 #### Step 2: Analyzing Protocol Hierarchies
 1. Identified active protocols:
