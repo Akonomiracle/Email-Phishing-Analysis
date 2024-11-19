@@ -77,59 +77,60 @@ Ref 7. Attackers location
 1. Metadata Analysis:
   - Used ExifTool to examine the files’ metadata, identifying the author's name and possible links to the phishing campaign.
 
-#### Step 3: Reporting Findings
+#### Step 4: Reporting Findings
 1. Compiled findings to trace the attacker's methods and potential command-and-control (C2) domain.
 
 
-#### Step 4: HTTP Stream Analysis
-1. Investigated an HTTP POST request from packet 38.
-2. Reconstructed the HTTP stream and discovered a login attempt with credentials:
-    - Username: admin
-    - Password: Admin@1234
-3. Decoded special characters (e.g., %40 → @) to interpret the full password.
-4. Observed that the login occurred over HTTP instead of HTTPS, indicating insecure communication.
-
-![Ref 4  Explore post request](https://github.com/user-attachments/assets/04fdd3a4-8485-4557-8e49-6ee4c9d6c294)
-Ref 4. Investigated an HTTP POST request.
-
-
-#### Step 5: Identifying Attack Tools
-1. Recognized the use of Gobuster v3.0.1, a directory brute-forcing tool, from the user agent string.
-2. Detected SQLmap v1.4.7, an automated SQL injection tool, used for unauthorized database access attempts.
-![Ref 6  Exploring a GET request on a packet we notice the user agent as gobuster](https://github.com/user-attachments/assets/ce8aff31-5470-4e2e-8ebc-b3de869f1b03)
-Ref 5. Recognized the use of Gobuster v3.0.1
-
-![Ref 8  Noticed another user agent sqlmap](https://github.com/user-attachments/assets/4ded5263-eedb-4171-963f-d4777fd83110)
-Ref 6. Detected SQLmap v1.4.7
-
-![Ref 9  An SQL attack following](https://github.com/user-attachments/assets/83ad6804-cbce-4537-8911-24cadead71aa)
-Ref 7. An SQL Attack detected
-
-#### Step 6: Web Shell Analysis
-1. Analyzed a callback from 10.251.96.5 to 10.251.96.4 on port 4422, which occurred during the attack.
-2. Reconstructed the TCP stream to identify the upload of a malicious web shell (db_functions.php).
-3. Observed attacker commands executed on the compromised server:
-    - whoami, cd, ls: Discovery commands.
-    - python: Used to establish a reverse shell.
-    - rm db: Attempted file removal.
-
-![Ref 10  successful webshell](https://github.com/user-attachments/assets/c931497d-2e18-46df-8af1-fd02e14ceed2)
-Ref 8. Web Shell Analysis
-
 ## Practical Applications and Organizational Benefits
 
-#### 1. Threat Detection and Incident Response
-SOC teams can use similar techniques to identify malicious activities like port scanning, unauthorized logins, and web shell uploads in their environments.
+#### 1. Phishing Attack Identification
+Enhanced understanding of how to detect phishing attempts using email headers, authentication results, and suspicious file behaviors.
 
-#### 2. Malicious Tool Recognition
-Understanding tools like Gobuster and SQLmap enhances the ability to detect and mitigate automated attacks.
+#### 2.Malware Containment in Secure Labs
+Safe analysis of potentially malicious attachments prevents organizational network compromise.
 
-#### 3. Post-Attack Forensics
-Reconstructing attacker activity enables organizations to identify vulnerabilities and strengthen defenses.
+#### 3. Cyber Threat Awareness
+Improved ability to identify and respond to phishing attempts, a critical skill for SOC analysts.
 
-#### 4. Skill Development
-Hands-on analysis of PCAP files provides real-world experience with network monitoring tools and techniques.
+#### 4. Efficient Incident Reporting
+Documented findings and recommendations in a clear, actionable format for organizational benefit.
 
 
 ## Conclusion 
-Through this project, I analyzed malicious network activity, identified attack patterns, and gained valuable experience with incident response. This exercise reinforced the importance of traffic analysis and the ability to detect, investigate, and respond to cybersecurity threats effectively.
+By completing this project, I developed a robust foundation in phishing email analysis, Base64 decoding, and file signature verification. This practical experience is essential for identifying and mitigating phishing attacks in real-world scenarios, protecting organizations from significant security threats.
+
+
+## Report of Findings and Recommendations
+### Findings
+
+#### 1. Email Header Analysis:
+  - The sender's email address was spoofed using a fake email service.
+  - The SPF check failed, and the "From" and "Reply-To" fields did not match, indicating malicious intent.
+
+#### 2. Encoded Attachments:
+  - Attachments were disguised with misleading extensions and contained hidden Base64 data.
+  - Metadata linked the attachments to the attacker, confirming their role in the phishing campaign.
+
+#### 3. Command-and-Control Domain:
+  - The domain "pasto.com" was identified as the probable C2 domain for the attacker’s bots.
+
+
+### Recommendations
+
+#### 1. Strengthen Email Security Measures:
+  - Implement DMARC, SPF, and DKIM protocols across the organization to prevent domain spoofing.
+  - Configure email gateways to flag emails with mismatched headers or failed SPF checks.
+
+#### 2. Educate Employees on Phishing Awareness:
+  - Conduct regular training sessions on identifying phishing attempts, focusing on red flags in email headers and suspicious attachments.
+
+#### 3. Establish a Secure Analysis Environment:
+  - Use isolated virtual machines for malware analysis and suspicious file handling to protect the organization’s network.
+
+#### 4. Deploy Endpoint Detection and Response (EDR):
+  - Install EDR solutions to monitor and block communication with known malicious C2 domains.
+
+#### 5. Regularly Audit Email Infrastructure:
+  - Review and update email filtering policies to adapt to evolving phishing tactics.
+
+By implementing these measures, the organization can enhance its resilience against phishing attacks and protect its critical assets.
