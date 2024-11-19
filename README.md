@@ -42,27 +42,28 @@ In this project, I analyzed an email phishing scenario provided in a CTF lab env
 Ref 1. SPF does not recognize the IP and domain as a permitted sender.
 
 ![Ref 2  from and reply to](https://github.com/user-attachments/assets/ca5dd3e4-0130-4908-be14-df2c005b9954)
+
 Ref 2. The from and reply to emails are different
 
 ![Ref 9  recieved from fake email](https://github.com/user-attachments/assets/94da17a5-cb89-4206-a6b0-bb1b76ca7ade)
 ![Ref 10  recieved from fake email](https://github.com/user-attachments/assets/52ecbfcb-ccb3-455c-a268-59d23e3f9ec7)
+
 Ref 3. recognized emkei as a fake email host
 
 2. Decoded Base64 Content:
   - Used CyberChef to decode the email body and attachments. The email body contained a ransom demand along with a clue encoded as Base64.
 ![Ref 4  decoded email](https://github.com/user-attachments/assets/e687e929-286e-4a2e-ba7b-dfaced4e91e9)
-Ref 4. decoded email using CyberChef
+Ref 4. Decoded email using CyberChef
 
-#### Step 2: Analyzing Protocol Hierarchies
-1. Identified active protocols:
-    - SSH
-    - DNS
-    - HTTP
-    - SMB
-2. These protocols indicated potential lateral movement opportunities within the network.
+#### Step 2: Attachment Analysis
 
-![Ref 3  Protocol Hierarchy](https://github.com/user-attachments/assets/9737a1a9-8d09-4dcf-9926-03f60924043c)
-Ref 2. Analyzing Protocol Hierarchies.
+1. File Signature Verification:
+  - Verified the attachments' true file types using hexadecimal signatures, revealing a ZIP file disguised as a PDF.
+![Ref 6  Decoded pdf puzzle](https://github.com/user-attachments/assets/78690662-63af-4682-a11c-36aecbba8fb4)
+Ref 5. Decoded attachment in email and their hexadecimal signature
+
+![Ref 7  file is zip not pdf](https://github.com/user-attachments/assets/b44bcda4-400c-468e-8ca5-10ffb45b3e6d)
+Ref 6. This shows that the attachment is a Zip file not a Pdf as said in the email
 
 
 #### Step 3: Detecting Port Scanning Activity
