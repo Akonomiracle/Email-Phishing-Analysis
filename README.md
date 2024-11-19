@@ -65,14 +65,20 @@ Ref 5. Decoded attachment in email and their hexadecimal signature
 ![Ref 7  file is zip not pdf](https://github.com/user-attachments/assets/b44bcda4-400c-468e-8ca5-10ffb45b3e6d)
 Ref 6. This shows that the attachment is a Zip file not a Pdf as said in the email
 
+2. Extracting Contents:
+  - Analyzed extracted files (a JPEG image, a PDF file with instructions, and an Excel file with hidden Base64 content).
 
-#### Step 3: Detecting Port Scanning Activity
-1. Examined conversation details under the IPv4 and TCP tabs.
-2. Noted that source IP 10.251.96.4 consistently targeted multiple ports on 10.251.96.5, with the same source port (41675) being used repeatedly.
-    - This consistent behavior strongly indicated port scanning activity.
+3. Decoding Hidden Content:
+  - Decoded the Base64 string in the Excel file, revealing the attacker’s location as "The Martian Colony."
+![Ref 8  decoded message from ransome puzzle](https://github.com/user-attachments/assets/73ed5016-004f-41b7-aa09-90a5153fcae3)
+Ref 7. Attackers location
 
-![Detecting Port Scanning Activity](https://github.com/user-attachments/assets/88084fba-6521-437b-8f31-3e0563a2795d)
-Ref 3. Detecting Port Scanning Activity.
+#### Step 3: Connecting Metadata to the Attacker
+1. Metadata Analysis:
+  - Used ExifTool to examine the files’ metadata, identifying the author's name and possible links to the phishing campaign.
+
+#### Step 3: Reporting Findings
+1. Compiled findings to trace the attacker's methods and potential command-and-control (C2) domain.
 
 
 #### Step 4: HTTP Stream Analysis
